@@ -124,6 +124,9 @@ usermod -aG docker vagrant
 # fix ownership of home
 chown -R vagrant:vagrant /home/vagrant/
 
+#Use French keyboard
+L='fr' && sudo sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'$L'\"/g' /etc/default/keyboard
+
 # clean the box
 apt-get -y autoclean
 apt-get -y clean
