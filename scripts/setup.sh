@@ -21,18 +21,14 @@ apt-get -y install vim git zip bzip2 fontconfig curl language-pack-en
 apt-get install default-jdk
 
 # install node.js
-curl -sL https://deb.nodesource.com/setup_7.x | bash -
+curl -sL https://deb.nodesource.com/setup_8.x | bash -
 apt-get install -y nodejs unzip python g++ build-essential
 
 # update npm
 npm install -g npm
 
-# install yarn
-npm install -g yarn
-su -c "yarn config set prefix /home/vagrant/.yarn-global" vagrant
-
-# install yeoman grunt bower gulp
-su -c "yarn global add @angular/cli" vagrant
+# install @angular/cli
+npm install -g @angular/cli
 
 ################################################################################
 # Install the graphical environment
@@ -69,19 +65,13 @@ apt install -y ubuntu-make
 # install Chromium Browser
 apt-get install -y chromium-browser
 
-# install MySQL Workbench
-apt-get install -y mysql-workbench
-
-# install PgAdmin
-apt-get install -y pgadmin3
-
 # install Guake
 apt-get install -y guake
 cp /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
 # install aymen-devbox
-git clone git://github.com/aymehri/aymen-devbox.git /home/vagrant/aymen-devbox
-chmod +x /home/vagrant/aymen-devbox/tools/*.sh
+#git clone git://github.com/aymehri/aymen-devbox.git /home/vagrant/aymen-devbox
+#chmod +x /home/vagrant/aymen-devbox/tools/*.sh
 
 # install zsh
 apt-get install -y zsh
