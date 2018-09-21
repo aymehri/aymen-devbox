@@ -1,34 +1,26 @@
 #!/bin/sh
 
 # update the system
-apt-get update
-apt-get upgrade
+# apt-get update
+# apt-get -y upgrade
 
 ################################################################################
 # Install the mandatory tools
 ################################################################################
 
-export LANGUAGE='en_US.UTF-8'
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
-locale-gen en_US.UTF-8
-dpkg-reconfigure locales
-
 # install utilities
 apt-get -y install vim git zip bzip2 fontconfig curl language-pack-en
 
 # install Java 8
-apt-get install default-jdk
+apt-get install openjdk-8-jdk
 
-# install node.js
+# install Node.js
 curl -sL https://deb.nodesource.com/setup_8.x | bash -
 apt-get install -y nodejs unzip python g++ build-essential
 
-# update npm
+# update NPM
 npm install -g npm
 
-# install @angular/cli
-npm install -g @angular/cli
 
 ################################################################################
 # Install the graphical environment
@@ -46,7 +38,7 @@ echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config
 # install Ubuntu desktop and VirtualBox guest tools
 apt-get install -y xubuntu-desktop virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 
-# remove light-locker
+# remove light-locker (see https://github.com/jhipster/jhipster-devbox/issues/54)
 apt-get remove -y light-locker --purge
 
 ################################################################################
@@ -54,16 +46,18 @@ apt-get remove -y light-locker --purge
 ################################################################################
 
 # install Ubuntu Make - see https://wiki.ubuntu.com/ubuntu-make
-
-add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
-
-apt-get update
-apt-get upgrade
-
-apt install -y ubuntu-make
+apt-get install -y ubuntu-make
 
 # install Chromium Browser
 apt-get install -y chromium-browser
+
+# install MySQL Workbench
+apt-get install -y mysql-workbench
+
+# install PgAdmin
+apt-get install -y pgadmin3
+
+
 
 # install Guake
 apt-get install -y guake
@@ -105,7 +99,7 @@ sysctl -p --system
 curl -sL https://get.docker.io/ | sh
 
 # install latest docker-compose
-curl -L "$(curl -s https://api.github.com/repos/docker/compose/releases | grep browser_download_url | head -n 4 | grep Linux | cut -d '"' -f 4)" > /usr/local/bin/docker-compose
+curl -L "$(curl -s https://api.github.com/repos/docker/compose/releases | grep browser_download_url | head -n 4 | grep Linux | grep -v sha256 | cut -d '"' -f 4)" > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 # configure docker group (docker commands can be launched without sudo)
